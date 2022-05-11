@@ -29,12 +29,15 @@ jobs:
          # registry: ghcr.io
           #username: ${{ github.actor }}
           #password: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Checkout project
+        uses: actions/checkout@v3
+      - name: aa
+        run: echo ${{ github.actor }}
       - name: Build and push image to GHCR
         uses: docker/build-push-action@v3
         with:
           registry: ghcr.io
-          username: "LuisCoralesM"
-          password: ${{ secrets.GITHUB_TOKEN }}          
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           push: true
           tags: latest
