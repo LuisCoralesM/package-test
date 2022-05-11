@@ -36,8 +36,6 @@ jobs:
       - name: Build and push image to GHCR
         uses: docker/build-push-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           push: true
           tags: latest
