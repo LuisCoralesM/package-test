@@ -23,6 +23,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          push: false
           tags: user/app:latest
   
   push_to_registry:
