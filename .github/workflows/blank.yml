@@ -1,25 +1,39 @@
 name: Publish GHCR Image
 on:
-  push: 
-    branches: 
-      - main
+  release: 
+    types: [published]
 
   pull_request:
-    branches: 
-      - main
+    branches: [main]
 
 jobs:
-  first:
-    name: first1
+  build_container:
+    name: Build Docker image
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-20.04
     steps:
-      - run: echo "${{ secrets.GITHUB_TOKEN }}"
-      - run: echo github.event
+      - name: Build the image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          tags: user/app:latest
   
   push_to_registry:
-    name: second2
-    if: github.event_name == 'push'
+    name: Push Docker image to Github Container Registry
+    if: github.event_name == 'release'
     runs-on: ubuntu-20.04
-    needs: [first]
+    needs: [build_container]
     steps:
-      - run: echo "2"
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image to GHCR
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: user/app:latest
