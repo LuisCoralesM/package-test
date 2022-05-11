@@ -14,10 +14,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: echo "${{ secrets.GITHUB_TOKEN }}"
+      - run: echo github.event
   
   push_to_registry:
     name: second2
-    if: github.event.push
+    if: github.event_name == 'push'
     runs-on: ubuntu-20.04
     needs: [first]
     steps:
