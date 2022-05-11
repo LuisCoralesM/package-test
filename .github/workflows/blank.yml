@@ -11,14 +11,12 @@ on:
 jobs:
   first:
     name: first1
-    if: github.event.push
     runs-on: ubuntu-20.04
     steps:
       - run: echo "1"
   
   push_to_registry:
     name: second2
-    if: github.event.pull_request
     runs-on: ubuntu-20.04
     needs: [first]
     steps:
