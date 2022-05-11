@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: "LuisCoralesM"
           password: ${{ secrets.GITHUB_TOKEN }}          
           push: true
           tags: latest
