@@ -22,7 +22,7 @@ jobs:
       - name: Build the image
         uses: docker/build-push-action@v3
         with:
-          push: true
+          push: false
           tags: user/app:latest
   
   push_to_registry:
