@@ -45,11 +45,13 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           
+      - run: echo ${{ steps.meta.outputs.tags }}
+          
       - name: Build and push image to GHCR
         uses: docker/build-push-action@v3
         with:
           registry: ghcr.io
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
