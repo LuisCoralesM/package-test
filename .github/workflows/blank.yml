@@ -46,7 +46,10 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           
       - name: Push image to GHCR
-        run: docker push ghcr.io/${{ github.repository.lowercase }}:latest
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}          
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          docker push ghcr.io/$IMAGE_ID:latest
 
       #- name: Build and push image to GHCR
        # uses: docker/build-push-action@v3
