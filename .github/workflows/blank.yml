@@ -6,20 +6,9 @@ on:
   pull_request:
     branches: [main]
   
-jobs:
-  build_container:
-    name: Build Docker image
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Build the image
-        uses: docker/build-push-action@v3
-        with:
-          push: false
-          tags: latest
-  
-  push_to_registry:
-    name: Push Docker image to Github Container Registry
+jobs: 
+  build_docker:
+    name: Build and push Docker image to Github Container Registry
     runs-on: ubuntu-20.04
     permissions:
         packages: write
@@ -44,7 +33,7 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
                     
-      - name: Build and push image to GHCR
+      - name: Build and push (if release) image to GHCR
         uses: docker/build-push-action@v3
         with:
           context: .
