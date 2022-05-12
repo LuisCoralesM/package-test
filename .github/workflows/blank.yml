@@ -33,11 +33,13 @@ jobs:
           IMAGE_ID=ghcr.io/${{ github.repository }}          
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           echo $IMAGE_ID
+      
+      - run: docker images
+
         
       - name: Build Container image
         run: docker build . --file ghcr.io/luiscoralesm/package-test --tag latest
       
-      - run: docker images
       
       - name: Login to GHCR
         uses: docker/login-action@v2
