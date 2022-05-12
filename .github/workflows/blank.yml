@@ -32,6 +32,10 @@ jobs:
       - name: Build Container image
         run: docker build .
         
+      - run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}          
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          echo $IMAGE_ID
       - name: Login to GHCR
         uses: docker/login-action@v2
         with:
