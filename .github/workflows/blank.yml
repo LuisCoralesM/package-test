@@ -47,7 +47,6 @@ jobs:
       - name: Build and push image to GHCR
         uses: docker/build-push-action@v3
         with:
-          registry: ghcr.io
           context: .
           push: ${{ github.event_name == 'release' }}
           tags: ${{ steps.meta.outputs.tags }}
