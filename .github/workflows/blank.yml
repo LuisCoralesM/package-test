@@ -41,10 +41,13 @@ jobs:
         uses: docker/metadata-action@v4.0.1
         with:
           images: ghcr.io/${{ github.repository }}
+          
+      - name: Push image to GHCR
+        run: docker push ghcr.io/OWNER/IMAGE_NAME:latest
 
-      - name: Build and push image to GHCR
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: latest
+      #- name: Build and push image to GHCR
+       # uses: docker/build-push-action@v3
+        #with:
+         # context: .
+          #push: true
+          #tags: latest
