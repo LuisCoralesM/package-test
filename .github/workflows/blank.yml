@@ -38,8 +38,10 @@ jobs:
 
         
       - name: Build Container image
-        run: docker build . --file ghcr.io/luiscoralesm/package-test --tag latest
+        run: docker build . --tag latest
       
+      - run: docker images
+
       
       - name: Login to GHCR
         uses: docker/login-action@v2
