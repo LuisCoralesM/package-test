@@ -51,5 +51,5 @@ jobs:
           registry: ghcr.io
           context: .
           push: true
-          tags: ghcr.io/luiscoralesm/package-test:latest
+          tags: ghcr.io/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
