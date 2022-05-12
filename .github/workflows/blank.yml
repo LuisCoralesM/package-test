@@ -34,7 +34,7 @@ jobs:
           IMAGE_NAME=${{ github.repository }}          
           IMAGE_NAME=$(echo $IMAGE_NAME | tr '[A-Z]' '[a-z]')
           echo $IMAGE_ID
-          docker build .
+          docker build . --tag latest
       
       - run: docker images
       
