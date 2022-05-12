@@ -60,6 +60,8 @@ jobs:
       - name: Build and push image to GHCR
         uses: docker/build-push-action@v3
         with:
+          registry: ghcr.io
+          Registry: ghcr.io
           context: .
           push: true
           tags: latest
