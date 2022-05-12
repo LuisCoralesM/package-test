@@ -31,8 +31,8 @@ jobs:
               
       - name: Build Container image
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository }}          
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          IMAGE_NAME=${{ github.repository }}          
+          IMAGE_NAME=$(echo $IMAGE_NAME | tr '[A-Z]' '[a-z]')
           echo $IMAGE_ID
           docker build . --file $IMAGE_ID --tag latest
       
@@ -51,11 +51,11 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           
-      #- name: Push image to GHCR
-       # run: |
-        #  IMAGE_ID=ghcr.io/${{ github.repository }}          
-         # IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          #docker push ghcr.io/$IMAGE_ID:latest
+      - name: Push image to GHCR
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}          
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          docker push ghcr.io/$IMAGE_ID:latest
 
       #- name: Build and push image to GHCR
        # uses: docker/build-push-action@v3
