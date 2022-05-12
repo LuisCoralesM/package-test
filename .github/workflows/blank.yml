@@ -35,8 +35,9 @@ jobs:
           echo $IMAGE_ID
         
       - name: Build Container image
-        run: docker build .
-        
+        run: docker build . --file ghcr.io/luiscoralesm/package-test --tag latest
+      
+      - run: docker images
       
       - name: Login to GHCR
         uses: docker/login-action@v2
@@ -51,11 +52,11 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           
-      - name: Push image to GHCR
-        run: |
-          IMAGE_ID=ghcr.io/${{ github.repository }}          
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          docker push ghcr.io/$IMAGE_ID:latest
+      #- name: Push image to GHCR
+       # run: |
+        #  IMAGE_ID=ghcr.io/${{ github.repository }}          
+         # IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          #docker push ghcr.io/$IMAGE_ID:latest
 
       #- name: Build and push image to GHCR
        # uses: docker/build-push-action@v3
